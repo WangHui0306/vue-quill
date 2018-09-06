@@ -79,8 +79,6 @@
     data() {
       return {
         quillUpdateImg: false, // 根据图片上传状态来确定是否显示loading动画，刚开始是false,不显示
-        serverUrl: 'http://192.168.1.107:9999/api/file',  // 这里写你要上传的图片服务器地址
-        header: {'Content-Type':'multipart/form-data'},  // 有的图片服务器要求请求头需要有token之类的参数，写在这里
         detailContent: '', // 富文本内容
         editorOption: {
           placeholder: '',
@@ -125,7 +123,7 @@
             'Content-Type': 'multipart/form-data'
           }
         }
-        this.$http.post('http://139.224.234.237:9999/api/file', fd, config)
+        this.$http.post('http://localhost:9999/api/file', fd, config) //上传图片的接口
           .then(res => {//成功后回调
             console.log(res)
             // res为图片服务器返回的数据
@@ -137,7 +135,7 @@
               // 获取光标所在位置
               let length = quill.getSelection().index;
               // 插入图片  res.info为服务器返回的图片地址
-              quill.insertEmbed(length, 'image', 'http://139.224.234.237:9999/public/'+res.data.object)
+              quill.insertEmbed(length, 'image', 'http://localhost:9999/public/'+res.data.object)//图片返回的链接
               // 调整光标到最后
               quill.setSelection(length + 1)
               console.log(quill)
@@ -197,7 +195,7 @@
           title: this.titleNews,
           sortNum: this.timestamp
         }
-        this.$http.post('http://139.224.234.237:9999/api/news', params)
+        this.$http.post('http://localhost:9999/api/news', params)//上传的接口
           .then(res => {
               console.log(res)
             this.detailContent = ''
