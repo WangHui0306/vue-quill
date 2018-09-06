@@ -23,7 +23,6 @@
               class="avatar-uploader"
               action="123"
               accept="image/jpeg,image/gif,image/png"
-              :headers="header"
               name="img"
               :before-upload="beforeUpload">
             </el-upload>
